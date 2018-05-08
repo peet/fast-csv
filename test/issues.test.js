@@ -212,6 +212,17 @@ it.describe("github issues", function (it) {
             var myParser = parser({delimiter: ","});
             assert.deepEqual(myParser(data, false), {
                 "line": "", "rows": [
+                  ["first_name", "last_name", "email_address", "empty"],
+                  ["First1", "Last1", "email1@email.com", " "]
+                ]
+            });
+        });
+
+        it.should("parse a block of CSV text with a trailing delimiter followed by a space at file end", function () {
+            var data = "first_name,last_name,email_address,empty\nFirst1,Last1,email1@email.com, ";
+            var myParser = parser({delimiter: ","});
+            assert.deepEqual(myParser(data, false), {
+                "line": "", "rows": [
                     ["first_name", "last_name", "email_address", "empty"],
                     ["First1", "Last1", "email1@email.com", " "]
                 ]
